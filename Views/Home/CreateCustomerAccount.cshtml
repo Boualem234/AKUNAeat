@@ -1,0 +1,48 @@
+﻿@model CustomerAccount
+
+<h1 class="mb-4">Création compte client</h1>
+
+<form asp-action="CreateCustomerAccount" method="post">
+    <table style="border-collapse: collapse;">
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="FirstName"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="FirstName" class="form-control" /></td>
+            <td><span asp-validation-for="FirstName" class="text-danger"></span></td>
+        </tr>
+        <tr><td colspan="3" style="height: 25px;"></td></tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="LastName"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="LastName" class="form-control" /></td>
+            <td><span asp-validation-for="LastName" class="text-danger"></span></td>
+        </tr>
+        <tr><td colspan="3" style="height: 25px;"></td></tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Email"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Email" class="form-control" /></td>
+            <td><span asp-validation-for="Email" class="text-danger"></span></td>
+        </tr>
+        <tr><td colspan="3" style="height: 25px;"></td></tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Password"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Password" type="password" class="form-control" /></td>
+            <td><span asp-validation-for="Password" class="text-danger"></span></td>
+        </tr>
+        <tr><td colspan="3" style="height: 25px;"></td></tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Adress"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Adress" class="form-control" /></td>
+            <td><span asp-validation-for="Adress" class="text-danger"></span></td>
+        </tr>
+        <tr><td colspan="3" style="height: 25px;"></td></tr>
+
+        <tr>
+            <td></td>
+            <td><button type="submit" class="btn btn-primary">Ajouter le compte</button></td>
+            <td></td>
+        </tr>
+    </table>
+</form>

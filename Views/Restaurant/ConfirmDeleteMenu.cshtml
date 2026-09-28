@@ -1,0 +1,8 @@
+﻿
+<h1>Confirmer la supression du menu</h1>
+<p>Êtes-vous sûr de vouloir supprimer ce menu ?</p>
+
+<form asp-action="DeleteMenu" asp-route-menu_id="@TempData["menuId"]" method="post">
+    <button type="submit" class="btn btn-danger">Oui, je veux le supprimer</button>
+    <a asp-controller="Restaurant" asp-action="ManageMenus" class="btn btn-secondary">Annuler</a>
+</form>

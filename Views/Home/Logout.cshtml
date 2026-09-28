@@ -1,0 +1,17 @@
+﻿@model Account
+
+<h1>Confirmer la déconnexion</h1>
+<p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+
+<form asp-action="ConfirmLogout" method="post">
+    <button type="submit" class="btn btn-danger">Oui, me déconnecter</button>
+
+    @if (ViewData["RestaurantOwnerAccountId"] != null)
+    {
+        <a asp-controller="Restaurant" asp-action="IndexRestaurantOwner" class="btn btn-secondary">Annuler</a>
+    }
+    else
+    {
+        <a asp-controller="Customer" asp-action="ListRestaurants" class="btn btn-secondary">Annuler</a>
+    }
+</form>

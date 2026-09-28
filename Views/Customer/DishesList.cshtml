@@ -1,0 +1,52 @@
+﻿@model List<Dish>
+
+<div class="container py-5">
+    <h1 class="text-center text-success fw-bold mb-5">Plats à la Carte</h1>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center fs-5">
+            Aucun plat à la carte disponible pour ce restaurant.
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var dish in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">@dish.Name</h5>
+                            <p class="card-text text-muted">@dish.Composition</p>
+                            <p class="card-text fw-bold text-orange">@dish.Price €</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="text-center mt-5">
+        <a asp-controller="Customer" asp-action="DetailsRestaurant" asp-route-id="@ViewData["RestaurantId"]"
+           class="btn btn-outline-success rounded-pill px-4 py-2 shadow-sm">
+            ⬅ Retour au restaurant
+        </a>
+    </div>
+</div>
+
+<style>
+    .text-orange {
+        color: #fd7e14;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #198754;
+        color: white;
+        border-color: #198754;
+    }
+
+    .btn-outline-success {
+        transition: all 0.2s ease-in-out;
+    }
+</style>

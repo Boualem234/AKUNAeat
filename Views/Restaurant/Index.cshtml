@@ -1,0 +1,68 @@
+﻿@model List<AKUNAeat.Models.Restaurant>
+
+<h1>Liste des Restaurants</h1>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <p>Aucun restaurant disponible pour le moment.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Type de Cuisine</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var restaurant in Model)
+            {
+                <tr>
+                    <td>@restaurant.Name</td>
+                    <td>@restaurant.Address</td>
+                    <td>@restaurant.CuisineType</td>
+                    <td>
+                        <a asp-controller="Restaurant" asp-action="Details" asp-route-id="@restaurant.RestaurantId" class="btn btn-primary">Voir les détails</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <nav>
+        <ul class="pagination">
+            @if (Convert.ToInt32(ViewData["CurrentPage"]) > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Convert.ToInt32(ViewData["CurrentPage"]) - 1)">Précédent</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Convert.ToInt32(ViewData["TotalPages"]); i++)
+            {
+                <li class="page-item @(i == Convert.ToInt32(ViewData["CurrentPage"]) ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+
+            @if (Convert.ToInt32(ViewData["CurrentPage"]) < Convert.ToInt32(ViewData["TotalPages"]))
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Convert.ToInt32(ViewData["CurrentPage"]) + 1)">Suivant</a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+}

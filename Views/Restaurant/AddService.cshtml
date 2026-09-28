@@ -1,0 +1,47 @@
+﻿@model Service
+
+<h1 class="mt-4 text-center ">Ajouter un nouveau service</h1>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+<form asp-action="AddService" method="post">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Heure de début -->
+            <div class="col-md-6 mb-4">
+                <label asp-for="StartTime" class="form-label text-muted">Heure de début</label>
+                <input asp-for="StartTime" class="form-control form-control-lg shadow-sm" placeholder="Sélectionner l'heure de début" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+
+            <!-- Heure de fin -->
+            <div class="col-md-6 mb-4">
+                <label asp-for="EndTime" class="form-label text-muted">Heure de fin</label>
+                <input asp-for="EndTime" class="form-control form-control-lg shadow-sm" placeholder="Sélectionner l'heure de fin" />
+                <span asp-validation-for="EndTime" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Type de service -->
+            <div class="col-md-6 mb-4">
+                <label asp-for="ServiceType" class="form-label text-muted">Type de service</label>
+                <select asp-for="ServiceType" asp-items="Html.GetEnumSelectList<ServiceType>()" class="form-select form-select-lg shadow-sm">
+                    <option value="">-- Sélectionnez un type de service --</option>
+                </select>
+                <span asp-validation-for="ServiceType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-6 text-center">
+                <button type="submit" class="btn btn-primary btn-lg w-100 shadow-lg">Ajouter le service</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="mt-4 text-center">
+    <a asp-action="IndexRestaurantManagement" class="btn btn-outline-secondary btn-lg">Retour</a>
+</div>
+

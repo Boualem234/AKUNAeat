@@ -1,0 +1,59 @@
+﻿@model List<Menu>
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-5">Tableau de bord - Gérer les menus</h1>
+        <a asp-action="IndexRestaurantManagement" class="btn btn-outline-secondary">Retour</a>
+    </div>
+
+    @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="mb-4 text-center">
+        <a asp-action="NumberDishes" class="btn btn-success btn-lg">Ajouter un menu</a>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <p class="text-center text-muted">Il n'y a pas de menus actuellement.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nom du menu</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var menu in Model)
+                    {
+                        <tr>
+                            <td class="align-middle">@menu.Name</td>
+                            <td class="align-middle">
+                                <a asp-action="ModifyMenu" asp-route-menu_id="@menu.MealId" class="btn btn-primary btn-sm me-2">
+                                    Modifier
+                                </a>
+                                <a asp-action="ConfirmDeleteMenu" asp-route-menu_id="@menu.MealId" class="btn btn-danger btn-sm">
+                                    Supprimer
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

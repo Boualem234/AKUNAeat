@@ -1,0 +1,35 @@
+﻿@{
+    var restaurantId = Context.Session.GetInt32("RestaurantId");
+}
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5">Tableau de bord - Propriétaire du restaurant</h1>
+
+        @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+        {
+            <div class="alert alert-success mt-3">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <p class="text-muted mt-2">
+            Id du resto connecté : <span class="fw-bold">@restaurantId</span>
+        </p>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+        <a asp-action="AddService" class="btn btn-success btn-lg">Ajouter un service</a>
+        <a asp-action="ManageMenus" class="btn btn-primary btn-lg">Gérer les menus</a>
+        <a asp-action="AddDish" class="btn btn-info btn-lg">Ajouter un plat</a>
+        <a asp-action="HandleOrders" class="btn btn-warning btn-lg">Gérer les commandes</a>
+    </div>
+
+
+
+    <div class="text-center">
+        <a asp-action="ChangeRestaurant" class="btn btn-secondary">
+            Changer de restaurant
+        </a>
+    </div>
+</div>

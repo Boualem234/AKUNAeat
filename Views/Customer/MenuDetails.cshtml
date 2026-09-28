@@ -1,0 +1,76 @@
+﻿@model Menu
+
+<div class="container py-5">
+    <h1 class="text-center text-success fw-bold mb-5">Détails du Menu</h1>
+
+    @if (Model == null)
+    {
+        <div class="alert alert-danger text-center fs-5">
+            Le menu demandé n'existe pas.
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-controller="Customer" asp-action="MenusList" asp-route-restaurantId="@ViewData["RestaurantId"]"
+               class="btn btn-outline-success rounded-pill px-4 py-2">
+                ⬅ Retour aux menus
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0 rounded-4 mb-5">
+            <div class="card-body">
+                <h2 class="card-title text-success">@Model.Name</h2>
+                <p class="card-text text-muted">@Model.Description</p>
+                <p class="card-text"><strong>Prix :</strong> <span class="text-orange">@Model.Price €</span></p>
+            </div>
+        </div>
+
+        <h3 class="text-orange mb-4">Composition du menu</h3>
+        @if (Model.Dishes != null && Model.Dishes.Any())
+        {
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                @foreach (var dish in Model.Dishes)
+                {
+                    <div class="col">
+                        <div class="card h-100 border-0 shadow-sm rounded-3">
+                            <div class="card-body">
+                                <h5 class="card-title text-success">@dish.Name</h5>
+                                <p class="card-text text-muted"><em>@dish.Composition</em></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning text-center">
+                Aucun plat associé à ce menu.
+            </div>
+        }
+
+        <div class="text-center mt-5">
+            <a asp-controller="Customer" asp-action="MenusList" asp-route-restaurantId="@ViewData["RestaurantId"]"
+               class="btn btn-outline-success px-4 py-2 rounded-pill shadow-sm">
+                ⬅ Retour aux menus
+            </a>
+        </div>
+    }
+</div>
+
+<style>
+    .text-orange {
+        color: #fd7e14;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #198754;
+        color: white;
+        border-color: #198754;
+    }
+
+    .btn-outline-success {
+        transition: all 0.2s ease-in-out;
+    }
+</style>

@@ -1,0 +1,79 @@
+﻿@model AKUNAeat.ViewModels.RestaurantServiceViewModel
+
+<h1 class="mb-4">Création d'un restaurant</h1>
+
+<form asp-action="AddRestaurant" method="post">
+    <h2>Informations du restaurant</h2>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.Name"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.Name" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.Name" class="text-danger"></span></td>
+        </tr>
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.Address"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.Address" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.Address" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.CuisineType"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.CuisineType" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.CuisineType" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.Description"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.Description" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.Description" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.PhoneNumber"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.PhoneNumber" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.PhoneNumber" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.OpeningHours"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.OpeningHours" type="time" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.OpeningHours" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Restaurant.ClosingHours"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Restaurant.ClosingHours" type="time" class="form-control" /></td>
+            <td><span asp-validation-for="Restaurant.ClosingHours" class="text-danger"></span></td>
+        </tr>
+    </table>
+
+    <h2 class="mt-4">Premier service</h2>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Service.StartTime"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Service.StartTime" type="time" class="form-control" /></td>
+            <td><span asp-validation-for="Service.StartTime" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Service.EndTime"></label></td>
+            <td style="padding-right: 12px;"><input asp-for="Service.EndTime" type="time" class="form-control" /></td>
+            <td><span asp-validation-for="Service.EndTime" class="text-danger"></span></td>
+        </tr>
+
+        <tr>
+            <td style="padding-right: 12px;"><label asp-for="Service.ServiceType"></label></td>
+            <td style="padding-right: 12px;">
+                <select asp-for="Service.ServiceType" asp-items="Html.GetEnumSelectList<ServiceType>()" class="form-control"></select>
+            </td>
+            <td><span asp-validation-for="Service.ServiceType" class="text-danger"></span></td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary mt-4">Ajouter le restaurant et le service</button>
+</form>
+
+<div class="mt-3">
+    <a asp-action="IndexRestaurantManagement" class="btn btn-secondary">Retour</a>
+</div>
+

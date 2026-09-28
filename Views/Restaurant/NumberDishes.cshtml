@@ -1,0 +1,12 @@
+﻿<h1 class="mt-4">Combien de plats souhaitez-vous ajouter au menu ?</h1>
+
+<form asp-action="SetDishCount" method="post">
+    <div class="form-group">
+        <label for="dishCount">Nombre de plats :</label>
+        <input type="number" id="dishCount" name="dishCount" class="form-control" min="1" max="20" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Confirmer</button>
+</form>
+
+<a asp-action="IndexRestaurantManagement">Retour</a>

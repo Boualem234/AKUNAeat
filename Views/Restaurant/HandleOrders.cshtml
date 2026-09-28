@@ -1,0 +1,78 @@
+﻿@model List<Order>
+
+@{
+    ViewData["Title"] = "Gérer les commandes";
+}
+
+<h1>Commandes pour le restaurant</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Client</th>
+            <th>Statut</th>
+            <th>Type</th>
+            <th>Heure</th>
+            <th>Service</th>
+            <th>Repas</th>
+            <th>Prix Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Order order in Model)
+        {
+            <tr>
+                <td>@order.OrderNumber</td>
+                <td>@order.Customer.FirstName @order.Customer.LastName</td>
+                <td>@order.Status</td>
+                <td>@(order.IsDelivery ? "Livraison" : "Sur place")</td>
+                <td>@order.OrderTime.ToString("HH:mm")</td>
+                <td>
+                    @if (order.Service != null)
+                    {
+                        <span>@order.Service.ServiceType</span><br />
+                        <span>@order.Service.StartTime - @order.Service.EndTime</span>
+                    }
+                    else
+                    {
+                        <span>Aucun service</span>
+                    }
+                </td>
+                <td>
+                    @if (order.Meals.Any())
+                    {
+                        <ul>
+                            @foreach (var item in order.Meals)
+                            {
+                                <div style="margin-bottom: 0.5rem; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                                    <strong>@item.Key.Name</strong><br />
+                                    <span style="color: #555;">Quantité : @item.Value</span>
+                                </div>
+
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span>Aucun repas</span>
+                    }
+                </td>
+                <td>@order.CalculateTotalPrice() euros</td>
+                <td>
+                    <form asp-action="UpdateOrderStatus" method="post">
+                        <input type="hidden" name="orderNumber" value="@order.OrderNumber" />
+                        <button type="submit" name="newStatus" value="ReadyForPickup" class="btn btn-success">Prêt</button>
+                        <button type="submit" name="newStatus" value="OrderCompleted" class="btn btn-primary">Terminé</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+        <div class="mt-3">
+            <a asp-action="IndexRestaurantManagement" class="btn btn-secondary">Retour</a>
+        </div>
+
+    </tbody>
+</table>

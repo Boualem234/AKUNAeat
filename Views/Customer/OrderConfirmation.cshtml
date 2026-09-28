@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Confirmation de Commande";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">🎉 Succès !</h4>
+                    <p>@TempData["SuccessMessage"]</p>
+                    <hr>
+                    <p class="mb-0">Merci pour votre commande. Vous pouvez consulter votre historique à tout moment.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">❌ Oups !</h4>
+                    <p>@TempData["ErrorMessage"]</p>
+                    <hr>
+                    <p class="mb-0">Veuillez réessayer ou contacter le support si le problème persiste.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-secondary" role="alert">
+                    <p>Aucun message à afficher.</p>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <a asp-action="ListRestaurants" class="btn btn-outline-success btn-lg px-5 rounded-pill shadow">
+        🔙 Retour
+    </a>
+</div>

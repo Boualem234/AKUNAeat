@@ -1,0 +1,63 @@
+﻿@model List<Menu>
+
+<div class="container py-5">
+    <h1 class="text-center text-success fw-bold mb-5">Menus du Restaurant</h1>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning text-center fs-5">
+            Aucun menu trouvé pour ce restaurant.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var menu in Model)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 rounded-4">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title text-success">@menu.Name</h5>
+                                <p class="card-text text-muted">@menu.Description</p>
+                            </div>
+                            <div class="mt-3">
+                                <a asp-controller="Customer" asp-action="MenuDetails" asp-route-mealId="@menu.MealId"
+                                   class="btn btn-outline-orange w-100 rounded-pill">Voir Détails</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="text-center mt-5">
+        <a asp-controller="Customer" asp-action="DetailsRestaurant" asp-route-id="@ViewData["RestaurantId"]"
+           class="btn btn-outline-success px-4 py-2 rounded-pill shadow-sm">
+            ⬅ Retour au restaurant
+        </a>
+    </div>
+</div>
+
+<style>
+    .btn-outline-orange {
+        color: #fd7e14;
+        border-color: #fd7e14;
+        transition: 0.2s ease-in-out;
+    }
+
+    .btn-outline-orange:hover {
+        background-color: #fd7e14;
+        color: white;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-weight: 600;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+    }
+</style>

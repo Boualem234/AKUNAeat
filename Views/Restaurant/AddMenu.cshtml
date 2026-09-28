@@ -1,0 +1,66 @@
+﻿@model MenuDishViewModel
+
+@{
+    int dishCount = ViewBag.DishCount != null ? (int)ViewBag.DishCount : 0;
+    List<Dish> allDishes = ViewBag.AllDishes as List<Dish>;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Créer un nouveau menu</h2>
+
+    <form asp-action="AddMenu" method="post" class="mx-auto" style="max-width: 600px;">
+
+        <input type="hidden" asp-for="MenuId" value="0"/>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Price" class="form-label"></label>
+            <input asp-for="Price" type="number" step="0.01" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <h4 class="mt-4 mb-3">Sélection des plats</h4>
+
+        @if (dishCount == 0)
+        {
+            <p class="text-muted">Aucun plat à sélectionner. Ajoutez d'abord des plats.</p>
+        }
+        else
+        {
+            @for (int i = 0; i < dishCount; i++)
+            {
+                <div class="mb-3">
+                    <label class="form-label">Plat @(i + 1)</label>
+                    <select asp-for="SelectedDishIds[@i]" class="form-select">
+                        <option value="">-- Sélectionnez un plat --</option>
+                        @foreach (var dish in allDishes)
+                        {
+                            <option value="@dish.MealId">@dish.Name (@dish.Composition)</option>
+                        }
+                    </select>
+                    <span asp-validation-for="SelectedDishIds" class="text-danger"></span>
+                </div>
+            }
+        }
+
+        <div class="d-grid gap-2 mt-4">
+            <button type="submit" class="btn btn-primary">Enregistrer le menu</button>
+        </div>
+    </form>
+
+    <div class="mt-3">
+        <a asp-action="IndexRestaurantManagement" class="btn btn-secondary">Retour</a>
+    </div>
+
+</div>

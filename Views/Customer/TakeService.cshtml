@@ -1,0 +1,35 @@
+﻿@model List<Service>
+
+<div class="container py-5">
+    <h1 class="text-center mb-5 text-success fw-bold">Choisissez un service</h1>
+
+    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger text-center">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    <div class="row g-4 justify-content-center">
+        @foreach (var service in Model)
+        {
+            <div class="col-lg-4 col-md-6">
+                <form asp-action="Delivery" method="post">
+                    <input type="hidden" name="ServiceId" value="@service.ServiceId" />
+                    <input type="hidden" name="ServiceType" value="@service.ServiceType" />
+                    <input type="hidden" name="StartTime" value="@service.StartTime" />
+                    <input type="hidden" name="EndTime" value="@service.EndTime" />
+
+                    <button type="submit" class="card h-100 shadow border-0 rounded-4 text-start w-100 p-0 bg-white hover-shadow transition-all" style="all: unset; cursor: pointer;">
+                        <div class="card-body d-flex flex-column justify-content-between p-4">
+                            <div>
+                                <h5 class="card-title text-success fw-bold">@service.ServiceType</h5>
+                                <p class="text-muted mb-1">🕒 Début : <strong>@service.StartTime</strong></p>
+                                <p class="text-muted">⏰ Fin : <strong class="text-success">@service.EndTime</strong></p>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+            </div>
+        }
+    </div>
+</div>

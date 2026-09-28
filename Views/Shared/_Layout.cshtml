@@ -1,0 +1,128 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    var isCustomer = ViewData["CustomerAccountId"] != null;
+    var isLoggedIn = isCustomer || ViewData["RestaurantOwnerAccountId"] != null;
+}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AKUNAeat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AKUNAeat.styles.css" asp-append-version="true" />
+    <style>
+        .navbar {
+            background-color: #2E8B57; 
+        }
+            .navbar .navbar-brand img {
+                width: 50px;
+                height: auto;
+            }
+        .navbar-light .navbar-nav .nav-link {
+            color: #fff; 
+        }
+            .navbar-light .navbar-nav .nav-link:hover {
+                color: #FFA500; 
+            }
+            .navbar-light .navbar-nav .nav-link:focus {
+                color: #FFA500;
+            }
+
+        .navbar-toggler-icon {
+            background-color: #FFA500; 
+        }
+
+        .dropdown-menu {
+            background-color: #2E8B57;
+        }
+
+        .dropdown-item {
+            color: #fff;
+        }
+
+            .dropdown-item:hover {
+                color: #FFA500;
+                background-color: rgba(255, 165, 0, 0.1);
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand">
+                    <img src="~/Images/AkunaEatLogo.png" alt="AkunaEat Logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        @if (isLoggedIn)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Logout">Déconnexion</a>
+                            </li>
+                            @if (isCustomer)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="ListRestaurants">Parcourir les restaurants</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Customer" asp-action="ViewStatutOrder">Statut des commandes</a>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Accueil</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    S'inscrire
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="registerDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="CreateCustomerAccount">Comme client</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="CreateRestaurantAccount">Comme restaurant</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Se connecter
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="LoginCustomer">Client</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Home" asp-action="LoginRestaurantOwner">Restaurant</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Customer" asp-action="ListRestaurants">Parcourir les restaurants</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <partial name="_ValidationScriptsPartial" /> @* client validation *@
+
+</body>
+</html>

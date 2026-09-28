@@ -1,0 +1,126 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9; 
+    color: #333; 
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-size: 2rem;
+    color: #2e8b57; 
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    background-color: #2e8b57; 
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+    .table th, .table td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+    }
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f7f7f7;
+}
+
+.table th {
+    background-color: #2e8b57; 
+    color: white;
+}
+
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #2e8b57; 
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border 0.3s;
+}
+
+    input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+        border-color: #2e8b57;
+    }
+
+a {
+    color: #2e8b57; 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+    a:hover {
+        color: #ff8c00; 
+    }
+
+footer {
+    background-color: #2e8b57;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.alert-success {
+    background-color: #28a745; 
+    color: white;
+}
+
+.alert-warning {
+    background-color: #ff8c00; 
+    color: white;
+}
+
+.alert-danger {
+    background-color: #dc3545; 
+    color: white;
+}
